@@ -2,8 +2,8 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transparansi Anggaran Pipa Induk - Termin 2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Transparansi Anggaran - Warga Perum Green Land</title>
     <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome for Icons -->
@@ -34,10 +34,11 @@
     <style>
         /* Custom Scrollbar for tables */
         .table-container::-webkit-scrollbar {
-            height: 8px;
+            height: 6px;
+            width: 6px;
         }
         .table-container::-webkit-scrollbar-track {
-            background: #f1f1f1; 
+            background: #f8fafc; 
             border-radius: 4px;
         }
         .table-container::-webkit-scrollbar-thumb {
@@ -46,12 +47,6 @@
         }
         .table-container::-webkit-scrollbar-thumb:hover {
             background: #94a3b8; 
-        }
-        .tab-active {
-            background-color: #f0f9ff;
-            color: #0284c7;
-            font-weight: 600;
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
         }
         [v-cloak] { display: none; }
         
@@ -70,91 +65,99 @@
 
     <!-- Header -->
     <header class="bg-gradient-to-r from-brand-600 to-brand-800 text-white shadow-lg sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto px-4 py-4 md:py-5 flex items-center justify-between">
+        <div class="max-w-6xl mx-auto px-4 py-3 md:py-5 flex items-center justify-between">
             <div class="flex items-center gap-3 md:gap-4">
-                <div class="bg-white/20 p-2 md:p-3 rounded-xl backdrop-blur-sm">
+                <div class="bg-white/20 p-2 md:p-3 rounded-xl backdrop-blur-sm shrink-0">
                     <i class="fa-solid fa-faucet-drip text-xl md:text-2xl"></i>
                 </div>
-                <div>
-                    <h1 class="text-lg md:text-2xl font-bold leading-tight">Laporan Pipa Induk</h1>
-                    <p class="text-brand-100 text-xs md:text-sm font-medium mt-0.5">Board Transparansi Anggaran</p>
+                <div class="flex flex-col justify-center">
+                    <h1 class="text-[15px] md:text-2xl font-bold leading-tight tracking-wide">Warga Perum Green Land</h1>
+                    <p class="text-brand-100 text-[11px] md:text-sm font-medium mt-0.5 md:mt-1">Laporan Pipa Induk Termin 2</p>
                 </div>
             </div>
-            <div class="bg-white/20 px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-medium backdrop-blur-sm flex items-center">
-                <i class="fa-regular fa-clock mr-1.5 md:mr-2"></i> <span class="hidden md:inline">Update: </span>Juni 2026
+            <!-- Tanggal Update: Tampil Icon saja di HP, Full text di Desktop -->
+            <div class="bg-white/20 w-8 h-8 md:w-auto md:px-4 md:py-2 rounded-full text-xs md:text-sm font-medium backdrop-blur-sm flex items-center justify-center shrink-0" title="Update: Juni 2026">
+                <i class="fa-regular fa-clock md:mr-2"></i> <span class="hidden md:inline">Juni 2026</span>
             </div>
         </div>
     </header>
 
-    <main class="max-w-6xl mx-auto px-4 mt-6 md:mt-8">
+    <main class="max-w-6xl mx-auto px-3 md:px-4 mt-4 md:mt-8">
         
         <!-- Summary Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 mb-6 md:mb-8">
             <!-- Pemasukan Card -->
-            <div class="bg-white rounded-2xl p-5 md:p-6 shadow-sm border border-slate-100 flex items-center gap-4 transform transition-all duration-300 hover:-translate-y-1 hover:shadow-md animate-fade-in" style="animation-delay: 0.1s;">
-                <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xl md:text-2xl shrink-0">
+            <div class="bg-white rounded-xl md:rounded-2xl p-4 md:p-6 shadow-sm border border-slate-100 flex items-center gap-3 md:gap-4 transform transition-all duration-300 hover:-translate-y-1 hover:shadow-md animate-fade-in" style="animation-delay: 0.1s;">
+                <div class="w-10 h-10 md:w-14 md:h-14 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-lg md:text-2xl shrink-0">
                     <i class="fa-solid fa-arrow-down"></i>
                 </div>
                 <div>
-                    <p class="text-xs md:text-sm text-slate-500 font-semibold mb-1 uppercase tracking-wide">Total Iuran</p>
-                    <h2 class="text-xl md:text-2xl font-bold text-slate-800" id="total-iuran">Rp 0</h2>
+                    <p class="text-[10px] md:text-sm text-slate-500 font-semibold mb-0.5 md:mb-1 uppercase tracking-wide">Total Iuran</p>
+                    <h2 class="text-lg md:text-2xl font-bold text-slate-800 leading-none" id="total-iuran">Rp 0</h2>
                 </div>
             </div>
 
             <!-- Pengeluaran Card -->
-            <div class="bg-white rounded-2xl p-5 md:p-6 shadow-sm border border-slate-100 flex items-center gap-4 transform transition-all duration-300 hover:-translate-y-1 hover:shadow-md animate-fade-in" style="animation-delay: 0.2s;">
-                <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center text-xl md:text-2xl shrink-0">
+            <div class="bg-white rounded-xl md:rounded-2xl p-4 md:p-6 shadow-sm border border-slate-100 flex items-center gap-3 md:gap-4 transform transition-all duration-300 hover:-translate-y-1 hover:shadow-md animate-fade-in" style="animation-delay: 0.2s;">
+                <div class="w-10 h-10 md:w-14 md:h-14 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center text-lg md:text-2xl shrink-0">
                     <i class="fa-solid fa-arrow-up"></i>
                 </div>
                 <div>
-                    <p class="text-xs md:text-sm text-slate-500 font-semibold mb-1 uppercase tracking-wide">Pengeluaran</p>
-                    <h2 class="text-xl md:text-2xl font-bold text-slate-800" id="total-pengeluaran">Rp 0</h2>
+                    <p class="text-[10px] md:text-sm text-slate-500 font-semibold mb-0.5 md:mb-1 uppercase tracking-wide">Pengeluaran</p>
+                    <h2 class="text-lg md:text-2xl font-bold text-slate-800 leading-none" id="total-pengeluaran">Rp 0</h2>
                 </div>
             </div>
 
             <!-- Saldo Card -->
-            <div class="bg-white rounded-2xl p-5 md:p-6 shadow-sm border border-slate-100 flex items-center gap-4 relative overflow-hidden transform transition-all duration-300 hover:-translate-y-1 hover:shadow-md animate-fade-in" id="saldo-card" style="animation-delay: 0.3s;">
-                <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xl md:text-2xl shrink-0 transition-colors duration-300" id="saldo-icon-container">
+            <div class="bg-white rounded-xl md:rounded-2xl p-4 md:p-6 shadow-sm border border-slate-100 flex items-center gap-3 md:gap-4 relative overflow-hidden transform transition-all duration-300 hover:-translate-y-1 hover:shadow-md animate-fade-in" id="saldo-card" style="animation-delay: 0.3s;">
+                <div class="w-10 h-10 md:w-14 md:h-14 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-lg md:text-2xl shrink-0 transition-colors duration-300" id="saldo-icon-container">
                     <i class="fa-solid fa-wallet" id="saldo-icon"></i>
                 </div>
-                <div>
-                    <p class="text-xs md:text-sm text-slate-500 font-semibold mb-1 uppercase tracking-wide">Sisa Saldo</p>
-                    <h2 class="text-xl md:text-2xl font-bold text-slate-800 transition-colors duration-300" id="total-saldo">Rp 0</h2>
+                <div class="pr-16 md:pr-0">
+                    <p class="text-[10px] md:text-sm text-slate-500 font-semibold mb-0.5 md:mb-1 uppercase tracking-wide">Sisa Saldo</p>
+                    <h2 class="text-lg md:text-2xl font-bold text-slate-800 leading-none transition-colors duration-300" id="total-saldo">Rp 0</h2>
                 </div>
                 <!-- Status Badge -->
-                <div class="absolute top-3 right-3 md:top-4 md:right-4" id="saldo-badge">
+                <div class="absolute top-1/2 -translate-y-1/2 right-3 md:top-4 md:translate-y-0 md:right-4" id="saldo-badge">
                     <!-- Injected via JS -->
                 </div>
             </div>
         </div>
 
         <!-- TAB CONTENT: PENGELUARAN (Satu-satunya tabel yang ditampilkan) -->
-        <div id="tab-pengeluaran" class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden animate-fade-in" style="animation-delay: 0.4s;">
+        <div id="tab-pengeluaran" class="bg-white rounded-xl md:rounded-2xl shadow-sm border border-slate-100 overflow-hidden animate-fade-in" style="animation-delay: 0.4s;">
+            
             <div class="p-4 md:p-6 border-b border-slate-100 flex flex-row justify-between items-center gap-2">
-                <h3 class="text-base md:text-lg font-bold text-slate-800">Detail Pengeluaran</h3>
-                <div class="bg-rose-50 text-rose-700 px-2.5 py-1 md:px-3 md:py-1.5 rounded-full text-xs font-semibold border border-rose-200 whitespace-nowrap">
+                <h3 class="text-[15px] md:text-lg font-bold text-slate-800">Rincian Pengeluaran</h3>
+                <div class="bg-rose-50 text-rose-700 px-2.5 py-1 md:px-3 md:py-1.5 rounded-full text-[10px] md:text-xs font-semibold border border-rose-200 whitespace-nowrap">
                     <span id="count-pengeluaran">0</span> Item
                 </div>
             </div>
+            
+            <!-- Mobile Swipe Hint -->
+            <div class="md:hidden bg-slate-50 border-b border-slate-100 px-3 py-1.5 text-[10px] text-slate-400 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-left-right"></i> Geser tabel ke samping untuk melihat detail
+            </div>
+
             <div class="table-container overflow-x-auto w-full">
-                <table class="w-full text-left border-collapse">
+                <table class="w-full text-left border-collapse whitespace-nowrap md:whitespace-normal">
                     <thead>
-                        <tr class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider">
-                            <th class="px-6 py-4 font-semibold border-b border-slate-200">No</th>
-                            <th class="px-6 py-4 font-semibold border-b border-slate-200">Tanggal</th>
-                            <th class="px-6 py-4 font-semibold border-b border-slate-200">Keterangan Barang</th>
-                            <th class="px-6 py-4 font-semibold border-b border-slate-200 text-right">Harga Satuan</th>
-                            <th class="px-6 py-4 font-semibold border-b border-slate-200 text-center">Jumlah</th>
-                            <th class="px-6 py-4 font-semibold border-b border-slate-200 text-right">Total Nominal</th>
+                        <tr class="bg-slate-50 text-slate-500 text-[10px] md:text-xs uppercase tracking-wider">
+                            <th class="px-4 py-3 md:px-6 md:py-4 font-semibold border-b border-slate-200">No</th>
+                            <th class="px-4 py-3 md:px-6 md:py-4 font-semibold border-b border-slate-200">Tanggal</th>
+                            <th class="px-4 py-3 md:px-6 md:py-4 font-semibold border-b border-slate-200">Keterangan Barang</th>
+                            <th class="px-4 py-3 md:px-6 md:py-4 font-semibold border-b border-slate-200 text-right">Harga Satuan</th>
+                            <th class="px-4 py-3 md:px-6 md:py-4 font-semibold border-b border-slate-200 text-center">Jumlah</th>
+                            <th class="px-4 py-3 md:px-6 md:py-4 font-semibold border-b border-slate-200 text-right">Total Nominal</th>
                         </tr>
                     </thead>
-                    <tbody class="text-sm divide-y divide-slate-100" id="tbody-pengeluaran">
+                    <tbody class="text-xs md:text-sm divide-y divide-slate-100" id="tbody-pengeluaran">
                         <!-- Rows injected by JS -->
                     </tbody>
                     <tfoot class="bg-slate-50">
                         <tr>
-                            <td colspan="5" class="px-6 py-4 text-right font-bold text-slate-700">Total Pengeluaran:</td>
-                            <td class="px-6 py-4 text-right font-bold text-rose-600 text-base" id="footer-total-pengeluaran">Rp 0</td>
+                            <td colspan="5" class="px-4 py-3 md:px-6 md:py-4 text-right font-bold text-slate-700 text-xs md:text-sm">Total Pengeluaran:</td>
+                            <td class="px-4 py-3 md:px-6 md:py-4 text-right font-bold text-rose-600 text-sm md:text-base whitespace-nowrap" id="footer-total-pengeluaran">Rp 0</td>
                         </tr>
                     </tfoot>
                 </table>
@@ -164,8 +167,8 @@
     </main>
 
     <!-- Footer -->
-    <footer class="text-center text-slate-400 text-sm mt-12 pb-6">
-        <p>Aplikasi Laporan Transparansi Anggaran &copy; 2026</p>
+    <footer class="text-center text-slate-400 text-xs md:text-sm mt-8 pb-6">
+        <p>Laporan Pipa Induk &copy; 2026 - Warga Perum Green Land</p>
     </footer>
 
     <!-- Application Logic -->
@@ -247,14 +250,14 @@
                 const tr = document.createElement('tr');
                 tr.className = 'hover:bg-slate-50 transition-colors';
                 tr.innerHTML = `
-                    <td class="px-6 py-4 text-slate-500">${index + 1}</td>
-                    <td class="px-6 py-4 whitespace-nowrap">${item.tgl}</td>
-                    <td class="px-6 py-4 font-medium text-slate-700">${item.ket}</td>
-                    <td class="px-6 py-4 text-right text-slate-600">${formatRupiah(item.hg)}</td>
-                    <td class="px-6 py-4 text-center">
-                        <span class="bg-slate-100 text-slate-700 py-1 px-2 rounded font-medium text-xs">${item.qty}</span>
+                    <td class="px-4 py-3 md:px-6 md:py-4 text-slate-500">${index + 1}</td>
+                    <td class="px-4 py-3 md:px-6 md:py-4">${item.tgl}</td>
+                    <td class="px-4 py-3 md:px-6 md:py-4 font-medium text-slate-700 whitespace-nowrap">${item.ket}</td>
+                    <td class="px-4 py-3 md:px-6 md:py-4 text-right text-slate-600">${formatRupiah(item.hg)}</td>
+                    <td class="px-4 py-3 md:px-6 md:py-4 text-center">
+                        <span class="bg-slate-100 text-slate-700 py-1 px-2 rounded font-medium text-[10px] md:text-xs">${item.qty}</span>
                     </td>
-                    <td class="px-6 py-4 text-right font-medium text-slate-700">${formatRupiah(item.total)}</td>
+                    <td class="px-4 py-3 md:px-6 md:py-4 text-right font-medium text-slate-700">${formatRupiah(item.total)}</td>
                 `;
                 tbodyPengeluaran.appendChild(tr);
             });
@@ -286,9 +289,9 @@
                 elSaldoIconContainer.classList.replace('text-blue-600', 'text-rose-600');
                 elSaldoIcon.classList.replace('fa-wallet', 'fa-triangle-exclamation');
 
-                elSaldoBadge.innerHTML = `<span class="bg-rose-100 text-rose-700 py-1 px-2.5 md:px-3 rounded-full text-[10px] md:text-xs font-bold border border-rose-200 shadow-sm inline-block">Defisit</span>`;
+                elSaldoBadge.innerHTML = `<span class="bg-rose-100 text-rose-700 py-1 px-2 md:px-3 rounded-full text-[9px] md:text-xs font-bold border border-rose-200 shadow-sm inline-block">Defisit</span>`;
             } else {
-                elSaldoBadge.innerHTML = `<span class="bg-emerald-100 text-emerald-700 py-1 px-2.5 md:px-3 rounded-full text-[10px] md:text-xs font-bold border border-emerald-200 shadow-sm inline-block">Aman</span>`;
+                elSaldoBadge.innerHTML = `<span class="bg-emerald-100 text-emerald-700 py-1 px-2 md:px-3 rounded-full text-[9px] md:text-xs font-bold border border-emerald-200 shadow-sm inline-block">Aman</span>`;
             }
         }
 

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transparansi Anggaran Pipa Induk - Termin 2</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            900: '#0c4a6e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Scrollbar for tables */
+        .table-container::-webkit-scrollbar {
+            height: 8px;
+        }
+        .table-container::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+            border-radius: 4px;
+        }
+        .table-container::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 4px;
+        }
+        .table-container::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+        .tab-active {
+            background-color: #f0f9ff;
+            color: #0284c7;
+            font-weight: 600;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+        [v-cloak] { display: none; }
+        
+        /* Entrance animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.4s ease-out forwards;
+            opacity: 0;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen pb-12 font-sans antialiased">
+
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-brand-600 to-brand-800 text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 md:py-5 flex items-center justify-between">
+            <div class="flex items-center gap-3 md:gap-4">
+                <div class="bg-white/20 p-2 md:p-3 rounded-xl backdrop-blur-sm">
+                    <i class="fa-solid fa-faucet-drip text-xl md:text-2xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-lg md:text-2xl font-bold leading-tight">Laporan Pipa Induk</h1>
+                    <p class="text-brand-100 text-xs md:text-sm font-medium mt-0.5">Board Transparansi Anggaran</p>
+                </div>
+            </div>
+            <div class="bg-white/20 px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-medium backdrop-blur-sm flex items-center">
+                <i class="fa-regular fa-clock mr-1.5 md:mr-2"></i> <span class="hidden md:inline">Update: </span>Juni 2026
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 mt-6 md:mt-8">
+        
+        <!-- Summary Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-8">
+            <!-- Pemasukan Card -->
+            <div class="bg-white rounded-2xl p-5 md:p-6 shadow-sm border border-slate-100 flex items-center gap-4 transform transition-all duration-300 hover:-translate-y-1 hover:shadow-md animate-fade-in" style="animation-delay: 0.1s;">
+                <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xl md:text-2xl shrink-0">
+                    <i class="fa-solid fa-arrow-down"></i>
+                </div>
+                <div>
+                    <p class="text-xs md:text-sm text-slate-500 font-semibold mb-1 uppercase tracking-wide">Total Iuran</p>
+                    <h2 class="text-xl md:text-2xl font-bold text-slate-800" id="total-iuran">Rp 0</h2>
+                </div>
+            </div>
+
+            <!-- Pengeluaran Card -->
+            <div class="bg-white rounded-2xl p-5 md:p-6 shadow-sm border border-slate-100 flex items-center gap-4 transform transition-all duration-300 hover:-translate-y-1 hover:shadow-md animate-fade-in" style="animation-delay: 0.2s;">
+                <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center text-xl md:text-2xl shrink-0">
+                    <i class="fa-solid fa-arrow-up"></i>
+                </div>
+                <div>
+                    <p class="text-xs md:text-sm text-slate-500 font-semibold mb-1 uppercase tracking-wide">Pengeluaran</p>
+                    <h2 class="text-xl md:text-2xl font-bold text-slate-800" id="total-pengeluaran">Rp 0</h2>
+                </div>
+            </div>
+
+            <!-- Saldo Card -->
+            <div class="bg-white rounded-2xl p-5 md:p-6 shadow-sm border border-slate-100 flex items-center gap-4 relative overflow-hidden transform transition-all duration-300 hover:-translate-y-1 hover:shadow-md animate-fade-in" id="saldo-card" style="animation-delay: 0.3s;">
+                <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xl md:text-2xl shrink-0 transition-colors duration-300" id="saldo-icon-container">
+                    <i class="fa-solid fa-wallet" id="saldo-icon"></i>
+                </div>
+                <div>
+                    <p class="text-xs md:text-sm text-slate-500 font-semibold mb-1 uppercase tracking-wide">Sisa Saldo</p>
+                    <h2 class="text-xl md:text-2xl font-bold text-slate-800 transition-colors duration-300" id="total-saldo">Rp 0</h2>
+                </div>
+                <!-- Status Badge -->
+                <div class="absolute top-3 right-3 md:top-4 md:right-4" id="saldo-badge">
+                    <!-- Injected via JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB CONTENT: PENGELUARAN (Satu-satunya tabel yang ditampilkan) -->
+        <div id="tab-pengeluaran" class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden animate-fade-in" style="animation-delay: 0.4s;">
+            <div class="p-4 md:p-6 border-b border-slate-100 flex flex-row justify-between items-center gap-2">
+                <h3 class="text-base md:text-lg font-bold text-slate-800">Detail Pengeluaran</h3>
+                <div class="bg-rose-50 text-rose-700 px-2.5 py-1 md:px-3 md:py-1.5 rounded-full text-xs font-semibold border border-rose-200 whitespace-nowrap">
+                    <span id="count-pengeluaran">0</span> Item
+                </div>
+            </div>
+            <div class="table-container overflow-x-auto w-full">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider">
+                            <th class="px-6 py-4 font-semibold border-b border-slate-200">No</th>
+                            <th class="px-6 py-4 font-semibold border-b border-slate-200">Tanggal</th>
+                            <th class="px-6 py-4 font-semibold border-b border-slate-200">Keterangan Barang</th>
+                            <th class="px-6 py-4 font-semibold border-b border-slate-200 text-right">Harga Satuan</th>
+                            <th class="px-6 py-4 font-semibold border-b border-slate-200 text-center">Jumlah</th>
+                            <th class="px-6 py-4 font-semibold border-b border-slate-200 text-right">Total Nominal</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-sm divide-y divide-slate-100" id="tbody-pengeluaran">
+                        <!-- Rows injected by JS -->
+                    </tbody>
+                    <tfoot class="bg-slate-50">
+                        <tr>
+                            <td colspan="5" class="px-6 py-4 text-right font-bold text-slate-700">Total Pengeluaran:</td>
+                            <td class="px-6 py-4 text-right font-bold text-rose-600 text-base" id="footer-total-pengeluaran">Rp 0</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+        
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center text-slate-400 text-sm mt-12 pb-6">
+        <p>Aplikasi Laporan Transparansi Anggaran &copy; 2026</p>
+    </footer>
+
+    <!-- Application Logic -->
+    <script>
+        // Data Source
+        const dataIuran = [
+            { tgl: '04/06/2026', ket: 'Tanpa Nama 1', nominal: 850000, metode: 'Transfer' },
+            { tgl: '05/06/2026', ket: 'Tanpa Nama 2', nominal: 420000, metode: 'Transfer' },
+            { tgl: '05/06/2026', ket: 'Tanpa Nama 3', nominal: 420000, metode: 'Transfer' },
+            { tgl: '05/06/2026', ket: 'Tanpa Nama 4', nominal: 420000, metode: 'Cash' },
+            { tgl: '05/06/2026', ket: 'Tanpa Nama 5', nominal: 420000, metode: 'Cash' },
+            { tgl: '05/06/2026', ket: 'Tanpa Nama 6', nominal: 420000, metode: 'Transfer' },
+            { tgl: '05/06/2026', ket: 'Tanpa Nama 7', nominal: 420000, metode: 'Cash' },
+            { tgl: '05/06/2026', ket: 'Tanpa Nama 8', nominal: 420000, metode: 'Cash' },
+            { tgl: '06/06/2026', ket: 'Tanpa Nama 9', nominal: 420000, metode: 'Transfer' },
+            { tgl: '06/06/2026', ket: 'Tanpa Nama 10', nominal: 420000, metode: 'Transfer' },
+        ];
+
+        const dataPengeluaran = [
+            { tgl: '06/06/2026', ket: 'Rucika AW 2 dem', hg: 112000, qty: 18, total: 2016000 },
+            { tgl: '06/06/2026', ket: 'Operloop 2 dem to 3/4', hg: 12000, qty: 17, total: 204000 },
+            { tgl: '06/06/2026', ket: 'T 2 dem', hg: 12500, qty: 17, total: 212500 },
+            { tgl: '06/06/2026', ket: 'Keni 2 dem', hg: 9000, qty: 2, total: 18000 },
+            { tgl: '06/06/2026', ket: 'Lem Ruglue', hg: 60000, qty: 1, total: 60000 },
+            { tgl: '06/06/2026', ket: 'G.Sanflex', hg: 18500, qty: 1, total: 18500 },
+            { tgl: '06/06/2026', ket: 'Keni Rucika 3/4', hg: 5000, qty: 20, total: 100000 },
+            { tgl: '06/06/2026', ket: 'Keni Rucika 3/4', hg: 5000, qty: 10, total: 50000 },
+            { tgl: '06/06/2026', ket: 'Keni Rucika 2 dem', hg: 9000, qty: 4, total: 36000 },
+            { tgl: '06/06/2026', ket: 'overloop 3x2', hg: 12500, qty: 1, total: 12500 },
+            { tgl: '06/06/2026', ket: 'Rucika 3/4', hg: 37000, qty: 15, total: 555000 },
+            { tgl: '06/06/2026', ket: 'TE Rucika 3/4', hg: 6000, qty: 8, total: 48000 },
+            { tgl: '06/06/2026', ket: 'DOP 3/4', hg: 3000, qty: 6, total: 18000 },
+            { tgl: '06/06/2026', ket: 'DOP 3/4', hg: 2000, qty: 3, total: 6000 },
+            { tgl: '06/06/2026', ket: 'Rucika 3/4', hg: 37000, qty: 6, total: 222000 },
+            { tgl: '06/06/2026', ket: 'Keni Rucika 3/4 2pcs @6000', hg: 6000, qty: 2, total: 12000 },
+            { tgl: '06/06/2026', ket: 'DOP 3/4 2pcs @3000', hg: 3000, qty: 2, total: 6000 },
+            { tgl: '06/06/2026', ket: 'Bensin Untuk Tossa', hg: 15000, qty: 1, total: 15000 },
+            { tgl: '06/06/2026', ket: 'T Panuloh', hg: 4500, qty: 4, total: 18000 },
+            { tgl: '06/06/2026', ket: 'Keni 3/4 12pcs @4000', hg: 4000, qty: 12, total: 48000 },
+            { tgl: '06/06/2026', ket: 'Lev PVC 2 pcs @10000', hg: 10000, qty: 2, total: 20000 },
+            { tgl: '06/06/2026', ket: 'Jasa Instalasi Pipa Induk borongan', hg: 1500000, qty: 1, total: 1500000 },
+            { tgl: '06/06/2026', ket: 'Rokok Surya 16', hg: 38000, qty: 1, total: 38000 },
+            { tgl: '07/06/2026', ket: 'PVC 2 dem Rucika', hg: 112000, qty: 2, total: 224000 },
+            { tgl: '07/06/2026', ket: 'PVC 1 dem Rucika', hg: 50000, qty: 1, total: 50000 },
+            { tgl: '07/06/2026', ket: 'Keni 2 dem', hg: 9000, qty: 2, total: 18000 },
+            { tgl: '07/06/2026', ket: 'Keni 1 dem', hg: 3000, qty: 1, total: 3000 },
+            { tgl: '07/06/2026', ket: 'overloop 2 dem ke 1 dem', hg: 12000, qty: 1, total: 12000 },
+            { tgl: '07/06/2026', ket: 'DOP 3/4', hg: 2000, qty: 10, total: 20000 },
+            { tgl: '07/06/2026', ket: 'Overloop 1 dem to 3/4', hg: 4000, qty: 1, total: 4000 },
+            { tgl: '07/06/2026', ket: 'Stop Kran 1 dem', hg: 30000, qty: 1, total: 30000 },
+            { tgl: '07/06/2026', ket: 'T 1 dem', hg: 5000, qty: 1, total: 5000 },
+            { tgl: '07/06/2026', ket: 'Sokdrat 3/4', hg: 4000, qty: 1, total: 4000 },
+            { tgl: '07/06/2026', ket: 'Kran 3/4', hg: 18000, qty: 1, total: 18000 },
+        ];
+
+        // Format Currency Function
+        const formatRupiah = (number) => {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            }).format(number);
+        };
+
+        // Initialize App
+        function initApp() {
+            // Hitung Total Iuran (Tanpa render tabel ke HTML)
+            let totalIuran = 0;
+            dataIuran.forEach((item) => {
+                totalIuran += item.nominal;
+            });
+
+            // Render Pengeluaran Table
+            const tbodyPengeluaran = document.getElementById('tbody-pengeluaran');
+            let totalPengeluaran = 0;
+
+            dataPengeluaran.forEach((item, index) => {
+                totalPengeluaran += item.total;
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-50 transition-colors';
+                tr.innerHTML = `
+                    <td class="px-6 py-4 text-slate-500">${index + 1}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">${item.tgl}</td>
+                    <td class="px-6 py-4 font-medium text-slate-700">${item.ket}</td>
+                    <td class="px-6 py-4 text-right text-slate-600">${formatRupiah(item.hg)}</td>
+                    <td class="px-6 py-4 text-center">
+                        <span class="bg-slate-100 text-slate-700 py-1 px-2 rounded font-medium text-xs">${item.qty}</span>
+                    </td>
+                    <td class="px-6 py-4 text-right font-medium text-slate-700">${formatRupiah(item.total)}</td>
+                `;
+                tbodyPengeluaran.appendChild(tr);
+            });
+
+            // Calculate Totals & Saldo
+            const saldoAkhir = totalIuran - totalPengeluaran;
+
+            // Update UI Elements
+            document.getElementById('total-iuran').textContent = formatRupiah(totalIuran);
+
+            document.getElementById('total-pengeluaran').textContent = formatRupiah(totalPengeluaran);
+            document.getElementById('footer-total-pengeluaran').textContent = formatRupiah(totalPengeluaran);
+            document.getElementById('count-pengeluaran').textContent = dataPengeluaran.length;
+
+            const elSaldo = document.getElementById('total-saldo');
+            const elSaldoCard = document.getElementById('saldo-card');
+            const elSaldoIconContainer = document.getElementById('saldo-icon-container');
+            const elSaldoIcon = document.getElementById('saldo-icon');
+            const elSaldoBadge = document.getElementById('saldo-badge');
+
+            elSaldo.textContent = formatRupiah(saldoAkhir);
+
+            // Styling adjustments based on negative/positive saldo
+            if (saldoAkhir < 0) {
+                elSaldo.classList.remove('text-slate-800');
+                elSaldo.classList.add('text-rose-600');
+                
+                elSaldoIconContainer.classList.replace('bg-blue-100', 'bg-rose-100');
+                elSaldoIconContainer.classList.replace('text-blue-600', 'text-rose-600');
+                elSaldoIcon.classList.replace('fa-wallet', 'fa-triangle-exclamation');
+
+                elSaldoBadge.innerHTML = `<span class="bg-rose-100 text-rose-700 py-1 px-2.5 md:px-3 rounded-full text-[10px] md:text-xs font-bold border border-rose-200 shadow-sm inline-block">Defisit</span>`;
+            } else {
+                elSaldoBadge.innerHTML = `<span class="bg-emerald-100 text-emerald-700 py-1 px-2.5 md:px-3 rounded-full text-[10px] md:text-xs font-bold border border-emerald-200 shadow-sm inline-block">Aman</span>`;
+            }
+        }
+
+        // Run Initialization on Load
+        document.addEventListener('DOMContentLoaded', initApp);
+
+    </script>
+</body>
+</html>
